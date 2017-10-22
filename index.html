@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="/node_modules/_jquery@3.2.1@jquery/dist/jquery.js"></script>
+
+    <style>
+        #iframe {
+            width: 100%;
+            resize: both;
+            min-height: 200px;
+        }
+
+        #bookmark-container .bookmark-item {
+            line-height: 30px;
+        }
+    </style>
+</head>
+
+<body>
+    <iframe id="iframe"></iframe>
+
+    <div id="bookmark-container">
+    </div>
+    <script>
+        var $iframe = $("#iframe");
+
+        var $bookmarkContainer = $("#bookmark-container");
+        $iframe.on('load', function () {
+            var $iframeContent = $($iframe[0].contentDocument);
+
+            $iframeContent.find('p').remove();
+            var $data = $iframeContent.find("body>dl");
+
+            appendBookmark($data, $bookmarkContainer);
+
+            function appendBookmark($curData, $target) {
+                $curData.children('dt').each(function (index, item) {
+                    var $a = $(item).children('a');
+                    if ($a.length > 0) {
+                        var url = $a.attr('href');
+                        var name = $a.text();
+                        var icon = $a.attr('icon');
+
+                        var $bookmarkItem = $('<div class="bookmark-item"><a href = "' + url + '" target="_blank"><img src="' + icon + '"/>' + name + '</a></div>');
+                        $bookmarkItem.appendTo($target);
+                    }
+                    else {
+                        //存在文件夹得情况
+                        var $groupHead = $(item).children("h3");
+                        var $groupItems = $(item).children("dl");
+
+                        var $bookmarkGroup = $("<div class='bookmark-group'>\
+                                        <span class='group-title'>"+ $groupHead.text() + "</span>\
+                                        <ul class='bookmark-group-data'></ul>\
+                                        </div>");
+                        $bookmarkGroup.appendTo($target);
+                        appendBookmark($groupItems,$bookmarkGroup.find('ul.bookmark-group-data'));
+                    }
+                });
+
+            }
+        });
+
+        $iframe.attr("src", "data.html");
+        ;
+    </script>
+</body>
+
+</html>

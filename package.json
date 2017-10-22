@@ -1,0 +1,25 @@
+{
+  "name": "chrome-bookmark",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+
+    "start": "http-server -a 0.0.0.0 -p 8000"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/polei/chrome-bookmark.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/polei/chrome-bookmark/issues"
+  },
+  "homepage": "https://github.com/polei/chrome-bookmark#readme",
+  "dependencies": {
+    "http-server": "^0.10.0",
+    "jquery": "^3.2.1"
+  }
+}
