@@ -9,14 +9,29 @@
     <script src="/node_modules/_jquery@3.2.1@jquery/dist/jquery.js"></script>
 
     <style>
+        html,
+        body {
+            margin: 0;
+            padding: 0;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
         #iframe {
             width: 100%;
             resize: both;
             min-height: 200px;
+            display: none;
         }
 
         #bookmark-container .bookmark-item {
             line-height: 30px;
+        }
+
+        #bookmark-container .bookmark-group {
+            border: 1px solid #ccc;
         }
     </style>
 </head>
@@ -59,7 +74,7 @@
                                         <ul class='bookmark-group-data'></ul>\
                                         </div>");
                         $bookmarkGroup.appendTo($target);
-                        appendBookmark($groupItems,$bookmarkGroup.find('ul.bookmark-group-data'));
+                        appendBookmark($groupItems, $bookmarkGroup.find('ul.bookmark-group-data'));
                     }
                 });
 
