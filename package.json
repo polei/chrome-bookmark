@@ -5,7 +5,6 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-
     "start": "http-server -a 0.0.0.0 -p 8000"
   },
   "repository": {
@@ -19,7 +18,11 @@
   },
   "homepage": "https://github.com/polei/chrome-bookmark#readme",
   "dependencies": {
+    "FileSaver": "^0.10.0",
     "http-server": "^0.10.0",
     "jquery": "^3.2.1"
+  },
+  "devDependencies": {
+    "FileSaver": "^0.10.0"
   }
 }
