@@ -47,33 +47,100 @@ $bookmarkContainer.on('click','input.group-check',function(){
     $(this).closest('.bookmark-group').find('input[type="checkbox"]').prop('checked',checked);
 });
 
-$("#btnExport").click(function(){
-    var $checkItems = $bookmarkContainer.find('input.item-check:checked');
 
-    var linkItemHtml = '';
-    $checkItems.each(function(index,item){
-        var $link = $(item).next('a');
-        var text = $link.text();
-        var href = $link.attr('href');
-        var icon = $link.find('img').attr('src')||'';
+function createGroupItemHtml($groupItems){
+    var html = "";
 
-        var iconHtml = (icon && ('ICON="' + icon + '"')) || '';
-        linkItemHtml += '<DT><A HREF="' + href + '" ' + iconHtml + '">' + text + '</A>\r\n';
+    $groupItems.each(function(index,item){
+        var $item = $(item);
+
+        if ($item.hasClass('bookmark-group')) {
+            var $checkbox = $item.children('.group-title').children('input:checked');
+
+
+            var $groupItems = $item.children('.group-title').next('.bookmark-group-data').children('.bookmark-group,.bookmark-item');
+
+            var groupItemHtml = createGroupItemHtml($groupItems);
+
+            if ($checkbox.length <= 0) {
+                html += groupItemHtml;
+            }
+            else {
+                var head = $item.children('.group-title').text();
+
+                html += '\r\n\
+                <DT><H3>'+ head + '</H3>\r\n\
+                <DL><p>\r\n\
+                '+ groupItemHtml + '\r\n\
+                </DL><p>\r\n';
+            }
+        }
+        else if($item.hasClass('bookmark-item')){
+            var $checkbox = $item.children('input:checked');
+            if($checkbox.length<=0){
+                return true;
+            }
+
+            var $link = $checkbox.next('a');
+            var text = $link.text();
+            var href = $link.attr('href');
+            var icon = $link.find('img').attr('src') || '';
+
+            var iconHtml = (icon && ('ICON="' + icon + '"')) || '';
+            html += '<DT><A HREF="' + href + '" ' + iconHtml + '>' + text + '</A>\r\n';
+        }
     });
+    return html;
+}
+
+$("#btnExport").click(function(){
+    var $data = $bookmarkContainer.children('.bookmark-group,.bookmark-item');
+    var dataHtml = createGroupItemHtml($data);
+    // $checkData.each(function(index,item){
+    //     var $item = $(item);
+
+    //     if(!$item.hasClass('un-track')){
+    //         return true;
+    //     }
+
+    //     //选择组
+    //     if ($item.hasClass('group-check')) {
+    //         var head = $item.closest('.group-title').text();
+
+    //         var $groupItems = $item.closest('.group-title').next('.bookmark-group-data').children('.bookmark-group,.bookmark-item');
+
+    //         var groupItemHtml = createGroupItemHtml($groupItems);
+
+    //         dataHtml += '\r\n\
+    //             <DT><H3>'+ head + '</H3>\r\n\
+    //             <DL><p>\r\n\
+    //             '+ groupItemHtml + '\r\n\
+    //             </DL><p>';
+    //         $item.removeClass('un-track');
+    //     }
+    //     //选择项
+    //     else if ($item.hasClass('item-check')) {
+    //         var $link = $item.next('a');
+    //         var text = $link.text();
+    //         var href = $link.attr('href');
+    //         var icon = $link.find('img').attr('src') || '';
+
+    //         var iconHtml = (icon && ('ICON="' + icon + '"')) || '';
+    //         dataHtml += '<DT><A HREF="' + href + '" ' + iconHtml + '">' + text + '</A>\r\n';
+    //         $item.removeClass('un-track');
+    //     }
+    // });
     
     var headHtml = '\
     <!DOCTYPE NETSCAPE-Bookmark-file-1>\r\n\
     <META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=UTF-8">\r\n\
     <TITLE>Bookmarks</TITLE>\r\n\
     <H1>Bookmarks</H1>\r\n\
-    <DL><p>\r\n\
-        <DT><H3 PERSONAL_TOOLBAR_FOLDER="true">书签栏</H3>\r\n\
-        <DL><p>\r\n';
+    <DL><p>\r\n';
     var footHtml = '\
-        </DL><p>\r\n\
     </DL><p>';
 
-    var preHtml = headHtml + linkItemHtml + footHtml;
+    var preHtml = headHtml + dataHtml + footHtml;
    
     dataToTxt(preHtml,'导出书签.html');
     return false;
