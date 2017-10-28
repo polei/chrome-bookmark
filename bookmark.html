@@ -44,7 +44,7 @@
         }
 
 
-        .bookmark-container .bookmark-item a{
+        .bookmark-container .bookmark-item a {
             max-width: 400px;
             display: inline-block;
             overflow: hidden;
@@ -55,6 +55,16 @@
 
         .bookmark-container .bookmark-group {
             border: 1px solid #ccc;
+            margin-bottom: 2px;
+        }
+
+        .bookmark-container .group-title:hover {
+            cursor: pointer;
+            color: #808080;
+        }
+
+        .bookmark-container .bookmark-group-data {
+            display: none;
         }
     </style>
 </head>
@@ -67,9 +77,9 @@
     </div>
     <div class='clearfix'>
         <button type="button" class="btn btn-info" id="btnRefresh">刷新</button>
-        
+
         <button type="button" class="btn btn-primary" id='btnExport'>导出html</button>
-        
+
     </div>
 </body>
 

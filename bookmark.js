@@ -52,8 +52,9 @@ function createTree(nodes) {
             else {
                 //存在文件夹得情况
                 var folderName = item.title;
+                var folderSrc = 'folder.png';
                 var $bookmarkGroup = $("<div class='bookmark-group'>\
-                                    <span class='group-title'><input type='checkbox' class='group-check'/>"+ folderName + "</span>\
+                                    <span class='group-title'><input type='checkbox' class='group-check'/><img src='"+ folderSrc + "'/>" + folderName + "</span>\
                                     <ul class='bookmark-group-data'></ul>\
                                     </div>");
                 $bookmarkGroup.appendTo($target);
@@ -109,11 +110,17 @@ function createGroupItemHtml($groupItems){
     return html;
 }
 
-
-$bookmarkContainer.on('click','input.group-check',function(){
+//checkbox 全选/全不选
+$bookmarkContainer.on('click','input.group-check',function(e){
     var checked = $(this).prop('checked');
 
     $(this).closest('.bookmark-group').find('input[type="checkbox"]').prop('checked',checked);
+    e.stopPropagation();
+});
+
+$bookmarkContainer.on('click','.group-title',function(){
+    $(this).next('.bookmark-group-data').slideToggle();
+    return false;
 });
 
 
