@@ -32,7 +32,7 @@ function fetchFavicon(url) {
 
 var $bookmarkContainer = $(".bookmark-container");
 function createTree(nodes) {
-
+    $bookmarkContainer.empty();
     appendBookmark(nodes[0], $bookmarkContainer);
 
     function appendBookmark(curData, $target) {
