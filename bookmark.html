@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>
+        书签管理
+    </title>
+
+    <script src="FileSaver.js"></script>
+    <script src="/node_modules/jquery/dist/jquery.js"></script>
+    <link rel="stylesheet" href="/node_modules/bootstrap/dist/css/bootstrap.min.css">
+    <script src="bookmark.js" defer="defer"></script>
+    <style type="text/css">
+        body {
+            margin: 10px;
+            white-space: nowrap;
+            min-width: 600px;
+            min-height: 300px;
+        }
+
+
+        html,
+        body {
+            padding: 0;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        #iframe {
+            width: 100%;
+            resize: both;
+            min-height: 200px;
+            display: none;
+        }
+
+        .bookmark-container .bookmark-item {
+            line-height: 30px;
+
+        }
+
+
+        .bookmark-container .bookmark-item a{
+            max-width: 400px;
+            display: inline-block;
+            overflow: hidden;
+            white-space: nowrap;
+            text-overflow: ellipsis;
+            vertical-align: top;
+        }
+
+        .bookmark-container .bookmark-group {
+            border: 1px solid #ccc;
+        }
+    </style>
+</head>
+
+<body>
+    <h3>书签管理</h3>
+
+
+    <div class="bookmark-container" style="height:350px;overflow: auto;">
+    </div>
+    <div class='clearfix'>
+        <button type="button" class="btn btn-info" id="btnRefresh">刷新</button>
+        
+        <button type="button" class="btn btn-primary" id='btnExport'>导出html</button>
+        
+    </div>
+</body>
+
+</html>
