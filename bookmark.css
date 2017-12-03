@@ -51,3 +51,7 @@ body {
 .bookmark-container .bookmark-group-data {
     display: none;
 }
+
+.bookmark-container .label-name{
+    vertical-align: 3px;
+}

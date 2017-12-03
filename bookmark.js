@@ -1,5 +1,4 @@
-
-//import '/node_modules/bootstrap/dist/css/bootstrap.min.css';
+//import 'bootstrap/dist/css/bootstrap.css';
 
 import './bookmark.css';
 var $ = require('jquery');
@@ -48,7 +47,7 @@ function createTree(nodes) {
                 var name = item.title;
 
 
-                var $bookmarkItem = $('<div class="bookmark-item"><input type="checkbox" class="item-check"/><a href = "' + url + '" target="_blank"><img/>' + name + '</a></div>');
+                var $bookmarkItem = $('<div class="bookmark-item"><input type="checkbox" class="item-check"/><a href = "' + url + '" target="_blank"><img/><span class="label-name">' + name + '</span></a></div>');
                 $bookmarkItem.appendTo($target);
 
                 fetchFavicon(url).then(function(imgUrl){
@@ -60,7 +59,7 @@ function createTree(nodes) {
                 var folderName = item.title;
                 var folderSrc = 'folder.png';
                 var $bookmarkGroup = $("<div class='bookmark-group'>\
-                                    <span class='group-title'><input type='checkbox' class='group-check'/><img src='"+ folderSrc + "'/>" + folderName + "</span>\
+                                    <span class='group-title'><input type='checkbox' class='group-check'/><img src='"+ folderSrc + "'/><span class='label-name'>" + folderName + "</span></span>\
                                     <ul class='bookmark-group-data'></ul>\
                                     </div>");
                 $bookmarkGroup.appendTo($target);
