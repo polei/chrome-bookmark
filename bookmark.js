@@ -1,4 +1,10 @@
 
+//import '/node_modules/bootstrap/dist/css/bootstrap.min.css';
+
+import './bookmark.css';
+var $ = require('jquery');
+var fileSaver = require('./FileSaver');
+
 $("#btnRefresh").click(function(){
     chrome.bookmarks.getTree(function(bookmarkNodes){
         createTree(bookmarkNodes);
@@ -146,5 +152,5 @@ $("#btnExport").click(function(){
 
 function dataToTxt(content,fileName) {
     var blob = new Blob([content], {type: "text/plain;charset=utf-8"});
-    saveAs(blob, fileName);//saveAs(blob,filename)
+    fileSaver.saveAs(blob, fileName);//saveAs(blob,filename)
 }

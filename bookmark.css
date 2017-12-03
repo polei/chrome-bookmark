@@ -1,0 +1,53 @@
+
+body {
+    margin: 10px;
+    white-space: nowrap;
+    min-width: 600px;
+    min-height: 300px;
+}
+
+
+html,
+body {
+    padding: 0;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+#iframe {
+    width: 100%;
+    resize: both;
+    min-height: 200px;
+    display: none;
+}
+
+.bookmark-container .bookmark-item {
+    line-height: 30px;
+
+}
+
+
+.bookmark-container .bookmark-item a {
+    max-width: 400px;
+    display: inline-block;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    vertical-align: top;
+}
+
+.bookmark-container .bookmark-group {
+    border: 1px solid #ccc;
+    margin-bottom: 2px;
+}
+
+.bookmark-container .group-title:hover {
+    cursor: pointer;
+    color: #808080;
+}
+
+.bookmark-container .bookmark-group-data {
+    display: none;
+}
